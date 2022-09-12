@@ -5,7 +5,6 @@ import pytest
 def test_int_properties(obj: int = 10) -> None:
     assert isinstance(obj, int)
     assert str(obj).isdigit()
-    assert 10 is obj
     assert 10 == obj
     assert obj ** 2 == 100
     assert str(obj) == '10'
@@ -38,7 +37,7 @@ def test_divided_by_zero(
         assert numerator / denominator == exception
 
 
-# было время сделать еще тестов
+# some more test
 def test_even_number() -> None:
     values = [0, 3, 4, 7, 2, 5, 8]
     assert any(value % 2 == 0 for value in values) is True
