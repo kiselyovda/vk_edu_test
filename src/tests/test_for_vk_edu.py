@@ -29,7 +29,7 @@ def test_times(
     ('12', TypeError), ('45', TypeError)
 ])
 def test_divided_by_zero(
-        numerator: int,
+        numerator: int | str,
         exception: type(BaseException),
         denominator: int = 0
 ) -> None:
@@ -63,6 +63,7 @@ def test_dict_properties(obj: dict = None) -> None:
     assert obj.get('second_value') == 1
     assert obj.clear() is None
     assert len(obj) == 0
+    assert obj == {}
 
 
 @pytest.mark.parametrize('key, value', [
@@ -86,7 +87,7 @@ def test_keys_and_values(
 ])
 def test_key_error(
         key: int | str,
-        value: int | str | bool,
+        value: bool | int | str,
         exception=KeyError
 ) -> None:
     keys = [2, '14', 'John', 'turn']
@@ -98,5 +99,13 @@ def test_key_error(
         assert value in obj.values()
         assert key, value in obj.items()
         assert key in obj
+        assert [k == key for k in obj.keys()]
+        assert [v == value for v in obj.values()]
+        assert obj.get(key)
+    assert key not in obj
+    assert value not in obj.values()
+    assert (key, value) not in obj.items()
+    assert obj.get(key) is None
+
 
 # endregion
